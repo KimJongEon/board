@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:fragment="head">
+<!-- 공통 설정(css, js등) -->
+
+<!-- 개별 설정 : 각 .html파일에서 아래의 태그들을 선언하고 태그안에 내용을 적어주면 됨-->
+<th:block layout:fragment="page_head"></th:block>
+<th:block layout:fragment="page_lib"></th:block>
+<th:block layout:fragment="page_css"></th:block>
+
+
+</head>
+</html>
