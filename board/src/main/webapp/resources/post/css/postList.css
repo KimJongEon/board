@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+/* 글 목록 테이블 */
+.postListTable{
+	margin-top:10%;
+}
+
+/* 페이징 넘버 */
+.paginationNumber{
+	justify-content: center;
+}
+
+/* 글 쓰기 버튼 */
+.writeBtn{
+	text-align: right;
+}

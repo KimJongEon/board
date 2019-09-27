@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="include/layout">
+
+<th:block layout:fragment="page_head">
+	<title>글 등록</title>
+</th:block>
+
+<th:block layout:fragment="contents">
+	<article>
+		<div class="container postRegisterDiv" role="main">
+
+			<h1>글 쓰기</h1>
+			<hr/>
+			<br/>
+			<form name="form" id="form" role="form" method="post" action="${pageContext.request.contextPath}/board/saveBoard">
+
+				<div class="mb-3">
+					<label for="title">제목</label>
+					<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요">
+				</div>				
+
+				<div class="mb-3">
+					<label for="content">내용</label>
+					<textarea class="form-control" rows="5" name="content" id="content" placeholder="내용을 입력해 주세요" ></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for="exampleFormControlFile1">Example file input</label>
+					<input type="file" class="form-control-file" id="exampleFormControlFile1">
+				</div>
+				
+			</form>
+
+			<div class="text-right"> 
+				<button type="button" class="btn btn-dark" id="btnSave">등록</button>
+				<button type="button" class="btn btn-dark" id="btnList">목록</button>
+			</div>
+
+		</div>
+
+	</article>
+
+	
+</th:block>
+
+
+<th:block layout:fragment ="page_css">
+	<link href="post/css/postRegister.css" rel="stylesheet">
+</th:block>
+
+<th:block layout:fragment="page_js">
+</th:block>
+
+
+</html>

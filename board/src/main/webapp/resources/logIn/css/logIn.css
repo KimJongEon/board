@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+/* 가운데 정렬을 위한 css ▼▼▼▼▼▼*/
+.card {
+	margin: 0 auto; /* Added */
+	float: none; /* Added */
+	margin-bottom: 10px; /* Added */
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+}
+
+.form-signin .form-control {
+	position: relative;
+	height: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	font-size: 16px;
+}
+/* 가운데 정렬을 위한 css ▲▲▲▲▲▲*/
+
+.cardDiv{
+	width: 20rem;
+	border-radius: 20px;
+	margin-top:10%;
+}
+
+.cardTitleDiv{
+	margin-top: 30px;
+}
+
+.cardTitleH2{
+	color: #113366;
+}

@@ -8,13 +8,10 @@
 	<title>글 목록</title>
 </th:block>
 
-<th:block layout:fragment="page_css">
-</th:block>
-
 <th:block layout:fragment="contents">
 	<div class="container">
-		<table class="table table-striped">
-			<thead>
+		<table class="table table-striped postListTable">
+			<thead class="thead-dark">
 				<tr>
 					<th>글 번호</th>
 					<th>제목</th>
@@ -56,16 +53,24 @@
 					<td>2019-09-21-19:37</td>
 					<td>2</td>
 				</tr>
+				
+				<tr>
+					<td>5</td>
+					<td>안녕하세요</td>
+					<td>배수휘</td>
+					<td>2019-09-25-11:37</td>
+					<td>1</td>
+				</tr>
 			</tbody>
 		</table>
 
 
 		<hr />
-		<p style="text-align: right;">
+		<p class="writeBtn">
 			<a href="#" class="btn btn-dark">글 쓰기</a>
 		</p>
 		<div class="text-center">
-			<ul class="pagination" style="justify-content: center;">
+			<ul class="pagination paginationNumber"> 
 				<li class="page-item"><a class="page-link" href="#">Previous</a></li>
 				<li class="page-item"><a class="page-link" href="#">1</a></li>
 				<li class="page-item"><a class="page-link" href="#">2</a></li>
@@ -77,6 +82,10 @@
 
 	</div>
 
+</th:block>
+
+<th:block layout:fragment ="page_css">
+	<link href="post/css/postList.css" rel="stylesheet">
 </th:block>
 
 <th:block layout:fragment="page_js">
