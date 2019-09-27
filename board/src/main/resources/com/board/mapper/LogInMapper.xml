@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.mapper.LogInMapper">
+	<!-- 관리자 홈페이지 : "생년월일 + 숫자"를 가져오는 sql문 -->
+	<select id="memberAge" resultType="com.together.domain.MemberVO">
+	<![CDATA[
+
+	]]>
+	</select>
+</mapper>
