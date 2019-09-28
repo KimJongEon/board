@@ -2,12 +2,14 @@
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="include/layout">
+	layout:decorate="~{include/layout}">
 
-<th:block layout:fragment="page_head">
+<head>
 	<title>글 등록</title>
-</th:block>
+	<link href="post/css/postRegister.css" rel="stylesheet">
+</head>
 
+<body>
 <th:block layout:fragment="contents">
 	<article>
 		<div class="container postRegisterDiv" role="main">
@@ -45,14 +47,6 @@
 
 	
 </th:block>
-
-
-<th:block layout:fragment ="page_css">
-	<link href="post/css/postRegister.css" rel="stylesheet">
-</th:block>
-
-<th:block layout:fragment="page_js">
-</th:block>
-
+</body>
 
 </html>

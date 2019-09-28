@@ -1,5 +1,26 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="include/head::head"/>
-	<body th:replace="include/body::body"/>
+<!-- 	<head th:replace="include/head::head"/> -->
+<head>
+<!-- bootstrap사용을 위해 뷰포트 삽입 -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- 부트스트랩 사용을 위한 공통 CSS -->
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<!-- 상단 네비게이션 -->
+	<th:block th:include="include/nav" />
+
+	<!-- 페이지 별 내용 들어갈 부분 -->
+	<th:block layout:fragment="contents"></th:block>
+
+	<!-- 공통 js 설정 -->
+	<script src="assets/js/jquery-3.4.1.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
 </html>

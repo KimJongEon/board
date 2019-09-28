@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<link href="assets/css/nav.css" rel="stylesheet" >
+</head>
+
+<body>
 <!-- nav 시작 -->
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 
 	<div class="collapse navbar-collapse" >
 		<ul class="navbar-nav ml-auto">
-			<!-- 사용자 아이디 -->
-			<li class="nav-item"><a class="nav-link" href="#">사용자 아이디 님 반갑습니다.</a></li>		
-			
-			<!-- 로그인 -->
-			<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
+		
+			<!-- 로그인 (세션 없을 때)-->
+			<li th:if="${session.memberVO_logIn == null}"class="nav-item">
+				<a href="/logInPage" class="nav-link logIn">로그인</a>
+			</li>
 
-			<!-- 로그아웃 -->
-			<li class="nav-item"><a class="nav-link" href="#">로그아웃</a></li>
+			<!-- 로그아웃 (세션 있을 때)-->
+			<li th:if="${session.memberVO_logIn}" class="nav-item">
+				<span th:text="|${session.memberVO_logIn.user_id} 님 환영합니다.|" class="user_id">
+				</span>
+				<a href="/logOut" class="nav-link logOut">로그아웃</a>
+			</li>
 		</ul>
 	</div>
 </nav>
 <!-- nav 끝 -->
+</body>
 </html>

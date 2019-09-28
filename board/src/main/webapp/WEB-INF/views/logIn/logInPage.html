@@ -2,12 +2,14 @@
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="include/layout">
+	layout:decorate="~{include/layout}">
 
-<th:block layout:fragment="page_head">
+<head>
 	<title>로그인 홈 화면</title>
-</th:block>
+	<link href="logIn/css/logInPage.css" rel="stylesheet">
+</head>
 
+<body>
 <th:block layout:fragment="contents">
 	<div class="card align-middle text-center cardDiv">
 		<div class="card-title cardTitleDiv" >
@@ -19,11 +21,11 @@
 				<br/>
 				
 				<label for="user_id" class="sr-only">Your ID</label>
-				<input type="text" id="user_id" class="form-control" placeholder="아이디" required autofocus>
+				<input type="text" id="user_id" name="user_id" class="form-control" placeholder="아이디" required autofocus>
 				<BR>
 				
 				<label for="inputPassword" class="sr-only">Password</label>
-				<input type="password" id="password" class="form-control" placeholder="비밀번호" required>
+				<input type="password" id="password" name="password" class="form-control" placeholder="비밀번호" required>
 				<br>
 				<div class="checkbox">
 					<label> <input type="checkbox" value="remember-me">
@@ -37,15 +39,6 @@
 		</div>
 	</div>
 </th:block>
-
-
-<th:block layout:fragment="page_css">
-	<link href="logIn/css/logInPage.css" rel="stylesheet">
-</th:block>
-
-<th:block layout:fragment="page_js">
-
-</th:block>
-
+</body>
 
 </html>
