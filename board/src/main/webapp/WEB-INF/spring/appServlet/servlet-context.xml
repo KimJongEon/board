@@ -57,6 +57,29 @@
 	<context:component-scan
 		base-package="com.example.board.controller" />
 
+	<!-- 인터셉터 객체 생성 -->
+	<beans:bean id="LogInInterceptor"
+		class="com.example.board.interceptor.LogInInterceptor">
+	</beans:bean>
+	<!-- Interceptor 설정 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/post**" />
+			
+<!-- 			예외처리할 controller mapping -->
+			
+			<exclude-mapping path="/logInPage" />
+			<exclude-mapping path="/logIn" />
+			<exclude-mapping path="/logOut" />
+			<exclude-mapping path="/signUpPage" />
+			<exclude-mapping path="/signUp" />
+			<exclude-mapping path="/" />
+			<exclude-mapping path="/resources/**"/>
+			
+			<beans:ref bean="LogInInterceptor" />
+		</interceptor>
+	</interceptors>
+	
 
 
 </beans:beans>

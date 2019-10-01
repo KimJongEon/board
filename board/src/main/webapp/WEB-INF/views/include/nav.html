@@ -12,7 +12,12 @@
 
 	<div class="collapse navbar-collapse" >
 		<ul class="navbar-nav ml-auto">
-		
+			
+			<!-- 홈으로 가기 -->
+			<li class="nav-item" >
+				<a href="/" class="nav-link home">홈(글 목록)</a>
+			</li>
+
 			<!-- 로그인 (세션 없을 때)-->
 			<li th:if="${session.memberVO_logIn == null}"class="nav-item">
 				<a href="/logInPage" class="nav-link logIn">로그인</a>
@@ -24,6 +29,7 @@
 				</span>
 				<a href="/logOut" class="nav-link logOut">로그아웃</a>
 			</li>
+			
 		</ul>
 	</div>
 </nav>

@@ -55,7 +55,7 @@ public class LogInController {
 			return "logIn/logInPage";
 		}else {
 			session.setAttribute("memberVO_logIn", memberVO_logIn);
-			return "post/postList";
+			return "redirect:/";
 		}
 		
 	}
@@ -64,7 +64,7 @@ public class LogInController {
 	@RequestMapping(value = "/logOut", method = RequestMethod.GET)
 	public String logOut(HttpSession session) {
 		session.invalidate();
-		return "post/postList";
+		return "redirect:/";
 	}
 
 }
