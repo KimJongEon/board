@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.board.mapper.PostMapper">
+	<!-- 글 목록 postList를 불러오는 sql문 선언 -->
+	<select id="postList" resultType="com.example.board.domain.PostVO">
+		<![CDATA[
+			SELECT * FROM post
+			ORDER BY p_dt desc
+		]]>
+	</select>
+	
+</mapper>

@@ -16,7 +16,7 @@ public class LogInServiceImplement implements LogInService {
 	@Override
 	public MemberVO logIn(String user_id, String password) {
 		// TODO Auto-generated method stub
-		System.out.println("로그인 서비스 임플리먼트 오는지 확인 : "+user_id + password);
+//		System.out.println("로그인 서비스 임플리먼트 오는지 확인 : "+user_id + password);
 		return mapper.logIn(user_id, password);
 	}
 
