@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.board.mapper.SignUpMapper">
+
+<insert id="signUp" parameterType="com.example.board.domain.MemberVO">
+		insert into member values
+		(#{user_id},#{password},#{user_nm},#{ph_no},sysdate)
+</insert>
+
+	<!-- 관리자 홈페이지 : 총 회원수를 보여주는 sql문 -->
+	<select id="idCheck" resultType="int">
+	<![CDATA[
+	select count(*) 
+	from member
+	where user_id = #{user_id}
+	]]>
+	</select>
+
+</mapper>

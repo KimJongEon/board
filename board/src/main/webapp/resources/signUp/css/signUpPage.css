@@ -1,9 +1,9 @@
 @charset "UTF-8";
 /* 가운데 정렬을 위한 css ▼▼▼▼▼▼*/
 .card {
-	margin: 0 auto; /* Added */
-	float: none; /* Added */
-	margin-bottom: 10px; /* Added */
+	margin: 0 auto; Added
+	float: none; Added
+	margin-bottom: 10px; Added
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
 		rgba(0, 0, 0, 0.19);
 }
@@ -17,7 +17,7 @@
 	padding: 10px;
 	font-size: 16px;
 }
-/* 가운데 정렬을 위한 css ▲▲▲▲▲▲*/
+/* 가운데 정렬을 위한 css ▲▲▲▲▲▲ */
 
 .cardDiv{
 	width: 20rem;
@@ -31,4 +31,8 @@
 
 .cardTitleH2{
 	color: #113366;
+}
+
+#id-success, #id-danger, #id-write, #pw-success, #pw-danger{
+	display:none;
 }
