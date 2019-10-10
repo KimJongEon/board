@@ -17,7 +17,7 @@
 			<h2 class="card-title text-center cardTitleH2">회원가입</h2>
 		</div>
 		<div class="card-body">
-			<form class="form-signin" method="POST" onSubmit="logincall();return false">
+			<form class="form-signin" method="POST" action="/signUp" >
 <!-- 				<h5 class="form-signin-heading">회원가입 정보를 입력하세요</h5> -->
 				<div class="alert alert-success" id="id-success">사용가능한 아이디 입니다.</div>
 				<div class="alert alert-danger" id="id-danger">이미 사용중인 아이디 입니다.</div>
@@ -30,7 +30,7 @@
 <!-- 				</div> -->
 				<br/>
 				
-				<input type="password" id="password_01" maxlength="15" class="form-control password" placeholder="비밀번호(최대 15자)" required/>
+				<input type="password" name="password" id="password_01" maxlength="15" class="form-control password" placeholder="비밀번호(최대 15자)" required/>
 				<br/>
 				
 				<input type="password" id="password_02" maxlength="15" class="form-control password" placeholder="비밀번호 확인" required/>
@@ -38,15 +38,14 @@
 				<div class="alert alert-danger" id="pw-danger">비밀번호가 일치하지 않습니다.</div>
 				<br/>
 
-				<input type="text" id="user_nm" class="form-control" maxlength="4" placeholder="이름" required/>
+				<input type="text" id="user_nm" name="user_nm" class="form-control" maxlength="4" placeholder="이름" required/>
 				<br/>
 				
 				<input type="text" id="ph_no" name="ph_no" class="form-control" maxlength="11" placeholder="01022227777" required/>
 				<br/>
 				
 				<button id="signUpBtn" class="btn btn-dark" type="submit" disabled="disabled">완료</button>
-				<button id="cancelBtn" class="btn btn-dark" type="submit">취소</button>
-				
+				<a href="/signUpPage" id="cancelBtn" class="btn btn-dark" >다시 입력하기</a>
 			</form>
 
 		</div>

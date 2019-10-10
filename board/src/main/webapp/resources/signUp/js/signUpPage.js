@@ -33,7 +33,7 @@ $(document).ready(function(){
 	
 // 비밀번호 확인
 //	$(function(){
-        $("input").keyup(function(){
+        $("input").blur(function(){
         	
             var pwd1=$("#password_01").val();
             var pwd2=$("#password_02").val();
@@ -71,7 +71,7 @@ $(document).ready(function(){
 //    });
 	
         //아이디 중복 체크
-        $("#user_id").keyup(function(){
+        $("#user_id").blur(function(){
         	var user_id = $('#user_id').val();
         	console.log(user_id);
         	

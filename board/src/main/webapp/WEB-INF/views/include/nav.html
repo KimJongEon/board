@@ -11,18 +11,20 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
 
 	<div class="collapse navbar-collapse" >
+		<!-- 홈으로 가기 -->
+		<a href="/" class="nav-link home">게시판 (Home)</a>
+		
 		<ul class="navbar-nav ml-auto">
-			
-			<!-- 홈으로 가기 -->
-			<li class="nav-item" >
-				<a href="/" class="nav-link home">홈(글 목록)</a>
-			</li>
-
 			<!-- 로그인 (세션 없을 때)-->
 			<li th:if="${session.memberVO_logIn == null}"class="nav-item">
 				<a href="/logInPage" class="nav-link logIn">로그인</a>
 			</li>
-
+			
+			<!-- 회원가입 (세션 없을 때) -->
+			<li th:if="${session.memberVO_logIn == null}"class="nav-item">
+				<a href="/signUpPage" class="nav-link logIn">회원가입</a>
+			</li>
+			
 			<!-- 로그아웃 (세션 있을 때)-->
 			<li th:if="${session.memberVO_logIn}" class="nav-item">
 				<span th:text="|${session.memberVO_logIn.user_id} 님 환영합니다.|" class="user_id">
