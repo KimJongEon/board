@@ -21,4 +21,17 @@ public class PostServiceImplement implements PostService {
 		return mapper.postList();
 	}
 
+	//글 등록 함수 : postRegister
+	@Override
+	public int postRegister(PostVO postVO) {
+		// TODO Auto-generated method stub
+		return mapper.postRegister(postVO);
+	}
+
+	@Override
+	public PostVO postDetail(int p_no) {
+		// TODO Auto-generated method stub
+		return mapper.postDetail(p_no);
+	}
+
 }

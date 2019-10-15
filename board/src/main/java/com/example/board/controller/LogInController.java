@@ -43,7 +43,7 @@ public class LogInController {
 	// 로그인
 	@RequestMapping(value = "/logIn", method = RequestMethod.POST)
 	public String logIn(MemberVO memberVO, HttpSession session, Model model, HttpServletResponse response) throws IOException {
-		System.out.println("로그인 컨트롤러 오는지 확인");
+//		System.out.println("로그인 컨트롤러 오는지 확인");
 		MemberVO memberVO_logIn = logInService.logIn(memberVO.getUser_id(), memberVO.getPassword());
 		
 		if(memberVO_logIn == null) {

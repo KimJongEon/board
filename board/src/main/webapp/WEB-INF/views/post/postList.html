@@ -6,12 +6,14 @@
 <head>
 	<title>글 목록</title>
 	<link href="post/css/postList.css" rel="stylesheet">
+	
+	<script src="post/js/postList.js"></script>
 </head>
 
 <body>
 <th:block layout:fragment="contents">
 	<div class="container">
-		<table class="table table-striped postListTable">
+		<table class="table table-hover postListTable">
 			<thead class="thead-dark">
 				<tr>
 					<th>글 번호</th>
@@ -23,11 +25,13 @@
 			</thead>
 
 			<tbody>
-				<tr th:each = "postList : ${postList}" >
+				<tr 
+				
+				th:each = "postList : ${postList}"
+					
+					style = "cursor:pointer;" >
 					<td th:text="${postList.p_no}"></td>
-					<td th:text="${postList.p_title}" 
-					style = "cursor:pointer;"
-					onClick = "location.href='/postDetail'"></td>
+					<td th:text="${postList.p_title}" ></td>
 					<td th:text="${postList.user_id}"></td>
 					<td th:text="${postList.p_dt}"></td>
 					<td th:Text="${postList.p_readCount}"></td>
@@ -38,7 +42,7 @@
 
 		<hr />
 		<p class="writeBtn">
-			<a href="/postRegister" class="btn btn-dark">글 쓰기</a>
+			<a href="/postRegisterPage" class="btn btn-dark">글 쓰기</a>
 		</p>
 		<div class="text-center">
 			<ul class="pagination paginationNumber"> 

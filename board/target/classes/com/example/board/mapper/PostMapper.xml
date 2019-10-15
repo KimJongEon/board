@@ -10,4 +10,15 @@
 		]]>
 	</select>
 	
+	<!-- 글 등록 postRegister sql문 -->
+	<insert id="postRegister" parameterType="com.example.board.domain.PostVO">
+		insert into post (user_id, p_title, p_content, p_dt, p_readCount)
+		values (#{user_id},#{p_title},#{p_content},now(),0)
+	</insert>
+	
+	<!-- 	특정 글 선택 시 postDetail을 가져오는 sql문	 -->
+	<select id="postDetail" resultType="com.example.board.domain.PostVO">
+		select * from post
+		where p_no = #{p_no}
+	</select>
 </mapper>

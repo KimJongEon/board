@@ -6,11 +6,55 @@
 
 <head>
 <title>상세 보기</title>
+<link href="/post/css/postDetail.css" rel="stylesheet">
 </head>
 
 <body>
 	<th:block layout:fragment="contents">
+		<article>
+			<div class="container mainDiv">
 
+				<div class="titleDiv">
+					<span th:text="${postDetail.p_title}"></span>
+					<span style="position: absolute; right: 14%;">
+						<span th:text="${postDetail.p_dt}"></span>
+						<!-- 본인 일때 수정, 삭제 가능 -->
+						<span th:if="${session.memberVO_logIn.user_id == postDetail.user_id}" >
+							<input class="btn btn-dark" type="button" value="수정">
+							<input class="btn btn-dark" type="button" value="삭제">
+						</span>
+					</span>
+					
+				</div>
+
+				<hr/>
+				<div class="attachDiv">
+					<h5>첨부파일</h5>
+					<hr/>
+				</div>
+				
+				<div class="contentDiv">
+					<span th:text="${postDetail.p_content}"></span>
+				</div>
+				<hr/>
+				
+				<h6>댓글</h6>
+				<div class="input-group replyDiv" >
+				
+    				<textarea class="form-control" id="replyTextArea" rows="3"></textarea>
+    				
+                   	<button class="btn btn-dark" type="button"name="commentInsertBtn">등록</button>
+
+  				</div>
+  				
+  				<br/>
+  				<div class="replyListDiv">
+  					<span>댓글 목록</span>
+  					<hr/>
+  				</div>
+  				
+			</div> <!-- mainDiv END -->
+		</article>
 	</th:block>
 </body>
 
