@@ -13,4 +13,12 @@ public interface PostService {
 	
 	//특정 글 선택 시 해당 post에 대한 정보를 가져오는 함수
 	public PostVO postDetail(int p_no);
+
+	//글 삭제 함수
+	public int postDel(int p_no);
+
+	//글 수정 함수
+	public int postEdit(String p_title, String p_content, int p_no);
+
+	
 }

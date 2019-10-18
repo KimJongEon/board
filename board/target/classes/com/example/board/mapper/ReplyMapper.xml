@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.board.mapper.ReplyMapper">
+	<select id="replyList" resultType="com.example.board.domain.ReplyVO" >
+		<![CDATA[
+			select * from reply
+			where p_no = #{p_no}
+		]]>
+	</select>
+	
+	<insert id="replyInsert" parameterType="com.example.board.domain.ReplyVO">
+		insert into reply (r_content, user_id, p_no, r_dt)
+		values (#{r_content}, #{user_id}, #{p_no}, now())
+	</insert>
+</mapper>

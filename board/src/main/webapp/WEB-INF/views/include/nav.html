@@ -29,6 +29,8 @@
 			<li th:if="${session.memberVO_logIn}" class="nav-item">
 				<span th:text="|${session.memberVO_logIn.user_id} 님 환영합니다.|" class="user_id">
 				</span>
+				<span th:text="${session.memberVO_logIn.user_id}" class="n_user_id" style="display:none;">
+				</span>
 				<a href="/logOut" class="nav-link logOut">로그아웃</a>
 			</li>
 			

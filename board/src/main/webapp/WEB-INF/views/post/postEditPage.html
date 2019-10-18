@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{include/layout}">
+
+<head>
+	<title>글 수정</title>
+	<link href="/post/css/postEditPage.css" rel="stylesheet">
+</head>
+
+<body>
+<th:block layout:fragment="contents">
+	<article>
+		<div class="container postRegisterDiv" role="main">
+
+			<h1>글 수정</h1>
+			<hr/>
+			<br/>
+			<form name="form" id="form" role="form" method="post" action="/postEdit">
+				<div class="mb-3" style="display:none;">
+					<label for="p_no">글 번호</label>
+					<input type="text" th:value="${postDetail.p_no}" class="form-control"
+					name="p_no" id="p_no">
+				</div>
+				
+				<div class="mb-3" style="display:none;">
+					<label for="user_id">작성자</label>
+					<input type="text" th:value="${postDetail.user_id}" class="form-control"
+					name="user_id" id="user_id">
+				</div>
+				
+				<div class="mb-3">
+					<label for="title">제목</label>
+					<input type="text" th:value="${postDetail.p_title}" class="form-control" name="p_title" id="title" placeholder="제목을 입력해 주세요">
+				</div>				
+
+				<div class="mb-3">
+					<label for="content">내용</label>
+					<textarea class="form-control" th:text="${postDetail.p_content}" rows="5" name="p_content" id="content" placeholder="내용을 입력해 주세요" ></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for="exampleFormControlFile1">Example file input</label>
+					<input type="file" class="form-control-file" id="exampleFormControlFile1">
+				</div>
+			
+				<div class="text-right"> 
+					<button type="submit" class="btn btn-dark" id="postEditBtn">수정</button>
+					<a href="/" class="btn btn-dark" id="btnList">취소</a>
+				</div>	
+			
+			</form>
+
+			
+
+		</div>
+
+	</article>
+
+	
+</th:block>
+</body>
+
+</html>

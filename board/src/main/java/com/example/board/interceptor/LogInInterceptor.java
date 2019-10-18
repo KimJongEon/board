@@ -47,16 +47,16 @@ public class LogInInterceptor extends HandlerInterceptorAdapter {
 	/**
 	 * Controller의 메소드가 수행이 완료되고, View 를 호출하기 전에 호출됩니다.
 	 */
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mv)
-			throws Exception {
-
-		System.out.println("컨트롤러 실행 후 :Bye");
-		// 컨트롤러 실행 후 MV사용. 로그인 필터역할도 충분할 듯 합니다.
-		HttpSession session = request.getSession();
-		if (session.getAttribute("memberVO_logIn") == null) {
-			response.sendRedirect("/logInPage");
-		}
-
-	}
+//	@Override
+//	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mv)
+//			throws Exception {
+//
+//		System.out.println("컨트롤러 실행 후 :Bye");
+//		// 컨트롤러 실행 후 MV사용. 로그인 필터역할도 충분할 듯 합니다.
+//		HttpSession session = request.getSession();
+//		if (session.getAttribute("memberVO_logIn") == null) {
+//			response.sendRedirect("/logInPage");
+//		}
+//
+//	}
 }

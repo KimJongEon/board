@@ -21,4 +21,20 @@
 		select * from post
 		where p_no = #{p_no}
 	</select>
+	
+	<!-- 글 삭제 sql문 -->
+	<delete id="postDel" parameterType="com.example.board.domain.PostVO">
+		delete
+		from post
+		where p_no = #{p_no}
+	</delete>
+	
+	<!-- 글 수정 sql문 -->
+	<delete id="postEdit" parameterType="com.example.board.domain.PostVO">
+		update post
+		set p_title = #{p_title},
+		p_content = #{p_content},
+		p_dt = now()
+		where p_no = #{p_no}
+	</delete>	
 </mapper>
