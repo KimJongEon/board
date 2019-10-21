@@ -21,4 +21,7 @@ public interface PostMapper {
 	
 	//글 수정 함수
 	public int postEdit(@Param ("p_title") String p_title, @Param ("p_content")String p_content, @Param ("p_no")int p_no);
+	
+	//글 조회수 증가 함수
+	public int upReadCount(int p_no);
 }

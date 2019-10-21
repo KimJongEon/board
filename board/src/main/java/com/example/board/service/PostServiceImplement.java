@@ -49,5 +49,12 @@ public class PostServiceImplement implements PostService {
 		// TODO Auto-generated method stub
 		return mapper.postEdit(p_title, p_content, p_no);
 	}
+	
+	//글 조회수 증가 함수
+	@Override
+	public int upReadCount(int p_no) {
+		// TODO Auto-generated method stub
+		return mapper.upReadCount(p_no);
+	}
 
 }

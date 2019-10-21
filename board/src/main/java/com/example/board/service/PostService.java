@@ -19,6 +19,9 @@ public interface PostService {
 
 	//글 수정 함수
 	public int postEdit(String p_title, String p_content, int p_no);
+	
+	//글 조회수 증가 함수
+	public int upReadCount(int p_no);
 
 	
 }

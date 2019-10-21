@@ -30,11 +30,18 @@
 	</delete>
 	
 	<!-- 글 수정 sql문 -->
-	<delete id="postEdit" parameterType="com.example.board.domain.PostVO">
+	<update id="postEdit" parameterType="com.example.board.domain.PostVO">
 		update post
 		set p_title = #{p_title},
 		p_content = #{p_content},
 		p_dt = now()
 		where p_no = #{p_no}
-	</delete>	
+	</update>
+	
+	<!-- 글 조회수 증가 sql문 -->
+	<update id="upReadCount" parameterType="com.example.board.domain.PostVO">
+		update post
+		set p_readCount = p_readCount + 1
+		where p_no = #{p_no}
+	</update>
 </mapper>

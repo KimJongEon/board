@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -88,13 +89,63 @@ public class PostController {
 	@RequestMapping(value = "/postDetail", method = RequestMethod.GET)
 	public ModelAndView postDetail(@RequestParam(value = "p_no",  required=false) int p_no, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
+		String user_id = ((MemberVO) request.getSession().getAttribute("memberVO_logIn")).getUser_id();
 		if(session.getAttribute("memberVO_logIn") == null) {
 			response.sendRedirect("/logInPage");
 		}else {
-
 			PostVO postDetail = postService.postDetail(p_no);
 			ArrayList<ReplyVO> replyList = replyService.replyList(p_no);
 			if(postDetail != null) {
+				
+				// 1. 조회수 쿠키 사용
+				Cookie[] cookies = request.getCookies();
+				// 2. 비교하기 위해 새로운 쿠키
+		        Cookie viewCookie = null;
+				 
+		        
+		        // 3.쿠키가 있을 경우 
+		        if (cookies != null && cookies.length > 0) 
+		        {
+		            for (int i = 0; i < cookies.length; i++)
+		            {
+		                // Cookie의 name이 cookie + reviewNo와 일치하는 쿠키를 viewCookie에 넣어줌 
+		                if (cookies[i].getName().equals("cookie"+ p_no + user_id))
+		                { 
+		                    System.out.println("처음 쿠키가 생성한 뒤 들어옴.");
+		                    viewCookie = cookies[i];
+		                }
+		            }
+		        }
+		        
+		        // 4. 만일 viewCookie가 null일 경우 쿠키를 생성해서 조회수 증가 로직을 처리함.
+	            if (viewCookie == null) {    
+	                System.out.println("cookie 없음");
+	                
+	                // 쿠키 생성(이름, 값) - 쿠키 이름을 글번호와 세션에 저장된 user_id로 구분
+	                Cookie newCookie = new Cookie("cookie"+p_no + user_id, "|" + p_no + "|");
+	                                
+	                // 쿠키 추가
+	                response.addCookie(newCookie);
+	 
+	                // 쿠키를 추가 시키고 조회수 증가시킴
+	                int result = postService.upReadCount(p_no);
+	                
+	                if(result>0) {
+	                    System.out.println("조회수 증가");
+	                }else {
+	                    System.out.println("조회수 증가 에러");
+	                }
+	            }
+	            // 5. viewCookie가 null이 아닐경우 쿠키가 있으므로 조회수 증가 로직을 처리하지 않음.
+	            else {
+	                System.out.println("cookie 있음");
+	                
+	                // 쿠키 값 받아옴.
+	                String value = viewCookie.getValue();
+	                
+	                System.out.println("cookie 값 : " + value);
+	        
+	            }	
 				ModelAndView mv = new ModelAndView();
 				mv.setViewName("post/postDetail"); // 뷰의 이름
 				mv.addObject("postDetail", postDetail); // 뷰로 보낼 데이터 값 : 게시글 상세 내용
