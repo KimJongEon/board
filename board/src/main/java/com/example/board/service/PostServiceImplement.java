@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.board.domain.PostVO;
 import com.example.board.mapper.PostMapper;
+import com.example.board.paging.Pagination;
 
 import lombok.AllArgsConstructor;
 
@@ -16,9 +17,9 @@ public class PostServiceImplement implements PostService {
 	
 	//DB에서 글 목록을 가져오는 함수 : postList
 	@Override
-	public ArrayList<PostVO> postList() {
+	public ArrayList<PostVO> postList(Pagination pagination) {
 		// TODO Auto-generated method stub
-		return mapper.postList();
+		return mapper.postList(pagination);
 	}
 
 	//글 등록 함수 : postRegister
@@ -56,5 +57,11 @@ public class PostServiceImplement implements PostService {
 		// TODO Auto-generated method stub
 		return mapper.upReadCount(p_no);
 	}
-
+	
+	//총 게시글 개수 확인
+	@Override
+	public int getBoardListCnt(){
+		// TODO Auto-generated method stub
+		return mapper.getBoardListCnt();
+	}
 }

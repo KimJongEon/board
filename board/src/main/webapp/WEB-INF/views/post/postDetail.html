@@ -14,9 +14,6 @@
 	<th:block layout:fragment="contents">
 		<article>
 			<div class="container mainDiv">
-
-				<div class="titleDiv">
-					<span th:text="${postDetail.p_title}" id="p_title"></span>
 					<span style="position: absolute; right: 14%;">
 						<span th:text="|작성자 : ${postDetail.user_id}  │  |"></span>
 						<span th:text="${postDetail.p_dt}"></span>
@@ -25,7 +22,14 @@
 							<input class="btn btn-dark" id="postEditPage" type="button" value="수정">
 							<input class="btn btn-dark" id="postDelBtn" type="button" value="삭제">
 						</span>
+						<!-- 뒤로가기 후 새로고침 (조회수가 늘어나는지 바로 확인하기 위해) -->
+						<a class="btn btn-dark" href="javascript:window.location.href = document.referrer;">목록</a>
 					</span>
+					
+					<br/>
+				<div class="titleDiv">
+					<span th:text="${postDetail.p_title}" id="p_title"></span>
+
 					
 				</div>
 

@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.board.domain.MemberVO;
 import com.example.board.domain.PostVO;
 import com.example.board.domain.ReplyVO;
+import com.example.board.paging.Pagination;
 import com.example.board.service.PostService;
 import com.example.board.service.ReplyService;
 
@@ -35,10 +36,20 @@ public class PostController {
 	private ReplyService replyService;
 	// 글 목록 페이지로 이동 (홈)
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String postList(Model model) {
-//		System.out.println(postService.postList());
-		model.addAttribute("postList", postService.postList());
-//		System.out.println("postList모델 확인"+model);
+	public String postList(Model model,
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range) {
+		
+		//전체 게시글 개수
+		int listCnt = postService.getBoardListCnt();
+//		System.out.println("1. 전체 게시글 개수 확인 : "+ listCnt);
+		
+		//Pagination 객체생성
+		Pagination pagination = new Pagination();
+		pagination.pageInfo(page, range, listCnt);
+//		System.out.println("2. Pagination객체 확인 : "+pagination);
+		model.addAttribute("pagination", pagination);
+		model.addAttribute("postList", postService.postList(pagination));
 		
 		
 		return "post/postList";
@@ -89,10 +100,11 @@ public class PostController {
 	@RequestMapping(value = "/postDetail", method = RequestMethod.GET)
 	public ModelAndView postDetail(@RequestParam(value = "p_no",  required=false) int p_no, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
-		String user_id = ((MemberVO) request.getSession().getAttribute("memberVO_logIn")).getUser_id();
+		
 		if(session.getAttribute("memberVO_logIn") == null) {
 			response.sendRedirect("/logInPage");
 		}else {
+			String user_id = ((MemberVO) request.getSession().getAttribute("memberVO_logIn")).getUser_id();
 			PostVO postDetail = postService.postDetail(p_no);
 			ArrayList<ReplyVO> replyList = replyService.replyList(p_no);
 			if(postDetail != null) {

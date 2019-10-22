@@ -7,6 +7,8 @@
 		<![CDATA[
 			SELECT * FROM post
 			ORDER BY p_dt desc
+			LIMIT #{startList}, #{listSize}
+			
 		]]>
 	</select>
 	
@@ -44,4 +46,17 @@
 		set p_readCount = p_readCount + 1
 		where p_no = #{p_no}
 	</update>
+	
+	<!-- 페이징 처리를 위한 sql문▼▼▼▼▼▼▼▼ -->
+	
+	<!-- 전체 글 갯수를 얻어오는 sql문 -->
+	<select id="getBoardListCnt" resultType="int">
+		<![CDATA[
+			SELECT
+			count(*) as listCnt
+			FROM post
+		]]>
+	</select>
+
+
 </mapper>

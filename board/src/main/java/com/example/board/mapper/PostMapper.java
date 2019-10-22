@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import com.example.board.domain.PostVO;
+import com.example.board.paging.Pagination;
 
 public interface PostMapper {
 	//DB에서 글 목록을 가져오는 함수 : postList
-	public ArrayList<PostVO> postList();
+	public ArrayList<PostVO> postList(Pagination pagination);
 	
 	//글 등록 함수 : postRegister
 	public int postRegister(PostVO postVO);
@@ -24,4 +25,7 @@ public interface PostMapper {
 	
 	//글 조회수 증가 함수
 	public int upReadCount(int p_no);
+	
+	//총 게시글 개수 확인
+	public int getBoardListCnt();
 }
