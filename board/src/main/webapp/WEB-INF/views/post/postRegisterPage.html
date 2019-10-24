@@ -7,6 +7,7 @@
 <head>
 	<title>글 등록</title>
 	<link href="post/css/postRegisterPage.css" rel="stylesheet">
+	<script src="/post/js/postRegisterPage.js"></script>
 </head>
 
 <body>
@@ -29,11 +30,17 @@
 					<textarea class="form-control" rows="5" name="p_content" id="content" placeholder="내용을 입력해 주세요" ></textarea>
 				</div>
 
-				<div class="form-group">
-					<label for="exampleFormControlFile1">Example file input</label>
-					<input type="file" class="form-control-file" id="exampleFormControlFile1">
-				</div>
+<!-- 				<div class="form-group"> -->
+<!-- 					<label for="exampleFormControlFile1">Example file input</label> -->
+<!-- 					<input type="file" class="form-control-file" id="exampleFormControlFile1"> -->
+<!-- 				</div> -->
 			
+			<h2>파일업로드 Drag And Drop</h2>
+<!--      파일을 업로드할 영역  -->
+    <div class="fileDrop"></div>
+<!--     업로드된 파일 목록 -->
+    <div class="uploadedList"></div>
+				
 				<div class="text-right"> 
 					<button type="submit" class="btn btn-dark" id="btnSave">등록</button>
 					<a href="/" class="btn btn-dark" id="btnList">목록</a>

@@ -6,3 +6,15 @@
 	 margin-top:5%;
 }
 
+/* 파일업로드 */
+    .fileDrop {
+        width:600px;
+        height: 200px;
+        border: 1px dotted blue;
+    }
+
+    small {
+        margin-left: 3px;
+        font-weight: bold;
+        color: gray;
+    }

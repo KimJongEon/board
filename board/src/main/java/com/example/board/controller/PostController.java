@@ -1,15 +1,21 @@
 package com.example.board.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.mariadb.jdbc.internal.logging.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.board.domain.MemberVO;
@@ -26,6 +34,7 @@ import com.example.board.domain.ReplyVO;
 import com.example.board.paging.Pagination;
 import com.example.board.service.PostService;
 import com.example.board.service.ReplyService;
+import com.example.board.upLoadFile.UploadFileUtils;
 
 import lombok.AllArgsConstructor;
 
@@ -233,5 +242,24 @@ public class PostController {
 		
 		return "redirect:/postDetail/?p_no=" + p_no;
 	}
+	
+	
+//	 private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
+
+	    @RequestMapping(value="/upload/uploadAjax", method=RequestMethod.GET)
+	    public void uploadAjax(){
+	        // uploadAjax.jsp로 포워딩
+	    }
+
+	    // produces="text/plain;charset=utf-8" : 파일 한글처리
+	    @ResponseBody
+	    @RequestMapping(value="/upload/uploadAjax", method=RequestMethod.POST, produces="text/plain;charset=utf-8")
+	    public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
+//	        logger.info("originalName : "+file.getOriginalFilename());
+//	        logger.info("size : "+file.getSize());
+//	        logger.info("contentType : "+file.getContentType());
+	    	String uploadPath = "/upload";
+	        return new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.OK);
+	    }
 }
 	
