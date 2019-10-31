@@ -4,28 +4,22 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.logging.Logger;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.mariadb.jdbc.internal.logging.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.board.domain.MemberVO;
@@ -34,7 +28,6 @@ import com.example.board.domain.ReplyVO;
 import com.example.board.paging.Pagination;
 import com.example.board.service.PostService;
 import com.example.board.service.ReplyService;
-import com.example.board.upLoadFile.UploadFileUtils;
 
 import lombok.AllArgsConstructor;
 
@@ -72,38 +65,38 @@ public class PostController {
 
 	}
 	
-	// 글 등록
-	@RequestMapping(value = "/postRegister", method = RequestMethod.POST)
-	public String postRegister(PostVO postVO, HttpSession session, HttpServletRequest request) {
-		String p_title = postVO.getP_title();
-		String p_content = postVO.getP_content();
-		String user_id = ((MemberVO) request.getSession().getAttribute("memberVO_logIn")).getUser_id();
-		
-//		System.out.println("컨트롤러 넘어오는지 테스트 : "+p_title + p_content + user_id);
-		
-		//session에서 가져온 user_id postVO객체의 user_id에 셋팅
-		postVO.setUser_id(user_id);
-		
-		int postRegister = postService.postRegister(postVO);
-		
-		if(postRegister != 0) { //글 등록 성공
-//			response.setContentType("text/html; charset=UTF-8");
-//			PrintWriter out = response.getWriter();
-//			out.println("<script>alert('글 등록 완료.'); </script>");
-//			out.flush();
-			
-			return "redirect:/";
-		}else { //글 등록 실패
-//			response.setContentType("text/html; charset=UTF-8");
-//			PrintWriter out = response.getWriter();
-//			out.println("<script>alert('글 등록 실패.'); </script>");
-//			out.flush();
-			
-			return "redirect:/";
-		}
-	
-//		return "redirect:/";
-	}
+//	// 글 등록
+//	@RequestMapping(value = "/postRegister", method = RequestMethod.POST)
+//	public String postRegister(PostVO postVO, HttpSession session, HttpServletRequest request) {
+//		String p_title = postVO.getP_title();
+//		String p_content = postVO.getP_content();
+//		String user_id = ((MemberVO) request.getSession().getAttribute("memberVO_logIn")).getUser_id();
+//		
+////		System.out.println("컨트롤러 넘어오는지 테스트 : "+p_title + p_content + user_id);
+//		
+//		//session에서 가져온 user_id postVO객체의 user_id에 셋팅
+//		postVO.setUser_id(user_id);
+//		
+//		int postRegister = postService.postRegister(postVO);
+//		
+//		if(postRegister != 0) { //글 등록 성공
+////			response.setContentType("text/html; charset=UTF-8");
+////			PrintWriter out = response.getWriter();
+////			out.println("<script>alert('글 등록 완료.'); </script>");
+////			out.flush();
+//			
+//			return "redirect:/";
+//		}else { //글 등록 실패
+////			response.setContentType("text/html; charset=UTF-8");
+////			PrintWriter out = response.getWriter();
+////			out.println("<script>alert('글 등록 실패.'); </script>");
+////			out.flush();
+//			
+//			return "redirect:/";
+//		}
+//	
+////		return "redirect:/";
+//	}
 	
 	//글 상세 페이지
 	@RequestMapping(value = "/postDetail", method = RequestMethod.GET)
@@ -205,6 +198,7 @@ public class PostController {
 	@RequestMapping (value = "/postEditPage", method = RequestMethod.GET)
 	public ModelAndView postEditPage(@RequestParam(value = "p_no",  required=false) int p_no, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		PostVO postDetail = postService.postDetail(p_no);
+		// 첨부파일 관련 VO 객체 데이터 추가
 		HttpSession session = request.getSession();	
 		if(session.getAttribute("memberVO_logIn") != null) {
 			System.out.println("여기오는건가");
@@ -244,22 +238,97 @@ public class PostController {
 	}
 	
 	
-//	 private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
+//	@RequestMapping(value = "/fileUpload/post") //ajax에서 호출하는 부분
+//    @ResponseBody
+//    public String upload(MultipartHttpServletRequest multipartRequest) { //Multipart로 받는다.
+//          
+//        Iterator<String> itr =  multipartRequest.getFileNames();
+//        String filePath = "C:/upload"; //설정파일로 뺀다.
+//         
+//        while (itr.hasNext()) { //받은 파일들을 모두 돌린다.
+//             
+//            /* 기존 주석처리
+//            MultipartFile mpf = multipartRequest.getFile(itr.next());
+//            String originFileName = mpf.getOriginalFilename();
+//            System.out.println("FILE_INFO: "+originFileName); //받은 파일 리스트 출력'
+//            */
+//             
+//            MultipartFile mpf = multipartRequest.getFile(itr.next());
+//      
+//            String originalFilename = mpf.getOriginalFilename(); //파일명
+//      
+//            String fileFullPath = filePath+"/"+originalFilename; //파일 전체 경로
+//      
+//            try {
+//                //파일 저장
+////                mpf.transferTo(new File(fileFullPath)); //파일저장 실제로는 service에서 처리
+//                 
+//                System.out.println("originalFilename => "+originalFilename);
+//                System.out.println("fileFullPath => "+fileFullPath);
+//      
+//            } catch (Exception e) {
+//                System.out.println("postTempFile_ERROR======>"+fileFullPath);
+//                e.printStackTrace();
+//            }
+//                          
+//       }
+//          
+//        return "success";
+//    }
+	
+	// 파일 업로드 테스트
+	@RequestMapping(value = "/postRegister", method = RequestMethod.POST)
+	public String postRegister(PostVO postVO, HttpSession session, HttpServletRequest request,
+			MultipartHttpServletRequest mtfRequest) {
+		String p_title = postVO.getP_title();
+		String p_content = postVO.getP_content();
+		String user_id = ((MemberVO) request.getSession().getAttribute("memberVO_logIn")).getUser_id();
+		String filePath = "C:/upload"; // 파일 저장 경로
+		
+		System.out.println("컨트롤러 넘어오는지 테스트 : "+p_title + p_content + user_id);
+		
+		//session에서 가져온 user_id postVO객체의 user_id에 셋팅
+		postVO.setUser_id(user_id);
+		
+		List<MultipartFile> fileList = mtfRequest.getFiles("file");
+		System.out.println("파일 리스트 확인 : " + fileList);
+		System.out.println("사이즈 확인 : " + fileList.size());
+		
+		for (MultipartFile mf : fileList) {
+			String originalFileName = mf.getOriginalFilename();
 
-	    @RequestMapping(value="/upload/uploadAjax", method=RequestMethod.GET)
-	    public void uploadAjax(){
-	        // uploadAjax.jsp로 포워딩
-	    }
+			System.out.println(originalFileName);
+			String fileFullPath = filePath + "/" + originalFileName; // 파일 전체 경로
+			try {
+				// 파일 저장
+				mf.transferTo(new File(fileFullPath)); // 파일저장 실제로는 service에서 처리
 
-	    // produces="text/plain;charset=utf-8" : 파일 한글처리
-	    @ResponseBody
-	    @RequestMapping(value="/upload/uploadAjax", method=RequestMethod.POST, produces="text/plain;charset=utf-8")
-	    public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
-//	        logger.info("originalName : "+file.getOriginalFilename());
-//	        logger.info("size : "+file.getSize());
-//	        logger.info("contentType : "+file.getContentType());
-	    	String uploadPath = "/upload";
-	        return new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.OK);
-	    }
+//          System.out.println("originalFilename => "+originalFilename);
+//          System.out.println("fileFullPath => "+fileFullPath);
+
+			} catch (Exception e) {
+//          System.out.println("postTempFile_ERROR======>"+fileFullPath);
+				e.printStackTrace();
+			}
+		}
+		int postRegister = postService.postRegister(postVO);
+		if (postRegister != 0) { // 글 등록 성공
+			//	response.setContentType("text/html; charset=UTF-8");
+			//	PrintWriter out = response.getWriter();
+			//	out.println("<script>alert('글 등록 완료.'); </script>");
+			//	out.flush();
+
+			return "redirect:/";
+		} else { // 글 등록 실패
+			//	response.setContentType("text/html; charset=UTF-8");
+			//	PrintWriter out = response.getWriter();
+			//	out.println("<script>alert('글 등록 실패.'); </script>");
+			//	out.flush();
+
+			return "redirect:/";
+		}
+
+			//return "redirect:/";
+	}
 }
 	
