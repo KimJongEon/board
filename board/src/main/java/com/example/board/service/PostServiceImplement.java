@@ -1,9 +1,11 @@
 package com.example.board.service;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import com.example.board.domain.AttachVO;
 import com.example.board.domain.PostVO;
 import com.example.board.mapper.PostMapper;
 import com.example.board.paging.Pagination;
@@ -63,5 +65,33 @@ public class PostServiceImplement implements PostService {
 	public int getBoardListCnt(){
 		// TODO Auto-generated method stub
 		return mapper.getBoardListCnt();
+	}
+
+	//파일업로드의 내용을 DB에 넣기전에 작성한 글의 p_no를 가져오는 함수 
+	@Override
+	public int findPostNo(String p_title, String p_content, String user_id) {
+		// TODO Auto-generated method stub
+		return mapper.findPostNo(p_title, p_content, user_id);
+	}
+
+	//파일업로드의 내용을 DB에 저장하는 함수
+	@Override
+	public int postAttachRegi(int p_no, String ori_nm, String uuid, String save_nm) {
+		// TODO Auto-generated method stub
+		return mapper.postAttachRegi(p_no, ori_nm, uuid, save_nm);
+	}
+
+	//글 상세내용을 불러올때 가져올 첨부파일 목록
+	@Override
+	public ArrayList<AttachVO> attachList(int p_no) {
+		// TODO Auto-generated method stub
+		return mapper.attachList(p_no);
+	}
+	
+	//글 수정에서 첨부파일 삭제 함수
+	@Override
+	public int delAttach(String uuid) {
+		// TODO Auto-generated method stub
+		return mapper.delAttach(uuid);
 	}
 }

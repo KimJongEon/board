@@ -9,6 +9,23 @@ $(document).ready(function(){
 var objDragAndDrop = $(".dragAndDropDiv");
 var rowCount=0;                
 
+// 글 등록 클릭시 제목, 내용 빈칸체크
+$("#btnSave").click(function(){
+	if($("#title").val().length == 0){
+		alert("제목을 입력해주세요"); //알림창 띄우기
+		$("#title").focus(); //제목창으로 포커스
+		return false; //submit을 막기위해 리턴 false 해줌
+	}
+	if($("#content").val().length == 0){
+		alert("내용을 입력해주세요");
+		$("#content").focus();
+		return false;
+	}
+	
+	
+}); //click function END
+
+//파일 첨부 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
                 $(document).on("dragenter",".dragAndDropDiv",function(e){
                     e.stopPropagation();
                     e.preventDefault();
@@ -158,6 +175,6 @@ var rowCount=0;
                   
                     status.setAbort(jqXHR);
                 }
-
+//파일 첨부 끝 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 }); // document ready END
 

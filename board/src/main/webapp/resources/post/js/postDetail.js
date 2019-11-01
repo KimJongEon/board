@@ -2,9 +2,58 @@ $(document).ready(function() {
 	var user_id = $(".n_user_id").text(); //세션에 저장된 아이디 값
 	var p_no = parseInt($(".p_no").text()); // 해당 글 번호
 	
-	replyList();
-
-
+	replyList(); // 댓글 목록 불러오는 함수 호출
+	attachList();// 첨부 파일 목록 불러오는 함수 호출
+	
+	// 첨부 파일 목록 불러오는 함수
+	function attachList(){
+		var data = {'p_no' : p_no};
+		var jsonData = JSON.stringify(data);
+		$.ajax({
+			type : "POST",
+			data : jsonData,
+			dataType : "json",
+			contentType : "application/json; charset=UTF-8",
+			url : "/attachList",
+			success : function(data){
+				console.log(data);
+				
+				var html = "";
+				
+				if(data.length > 0){   
+	                for(i=0; i<data.length; i++){
+	                	var test = data[i].uuid + ","+ data[i].save_nm;
+	                	var onclickData = "javascript:deleteAttach" + "('" + test + "')";
+//	                	console.log(uuid);
+//	                	attach_no, ori_nm, p_no, save_nm, uuid
+	                	html += "<div>";
+	                	html += "<a href='/upLoad/"+data[i].save_nm+"' download='"+data[i].ori_nm+"' class='ori_nm'>"+data[i].ori_nm+"</a>";
+	                    html += "<span class='save_nm' style='display : none;'> "+ data[i].save_nm +"</span>";
+	                    html += "<span class='uuid' style='display : none;'> "+ data[i].uuid +"</span>";
+	                    html += "<br/>";
+	                    html += "</div>";
+	                    
+//	                    html += "<span class='r_no' style='display : none;'> "+ data[i].r_no +"</span>";
+//	                    html += "<span class='r_user_id'>" +data[i].user_id+ "</span>";
+//	                    html += "<span style='position: absolute; right: 14%;'>" +
+//	                    		"<span class='r_dt' ></span>";
+	                    
+	                }
+	                
+	            } else { // 첨부파일이 없을 때
+	                
+	                html += "<div>";
+	                html += "<div><table class='table'><h6><strong>등록된 첨부파일이 없습니다.</strong></h6>";
+	                html += "</table></div>";
+	                html += "</div>";
+	                
+	            }
+	            
+                html += "<hr/>";
+	            $(".attachDiv").html(html);
+			}
+		}); //ajax END
+	}; //attachList function END
 	
 	// 댓글 목록 
 	function replyList(){
@@ -55,7 +104,9 @@ $(document).ready(function() {
 				
 			}
 		});
-	}
+	};
+	
+	
 	
 	
 	// 댓글 등록 ajax

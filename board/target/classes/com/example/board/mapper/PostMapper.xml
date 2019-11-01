@@ -57,6 +57,41 @@
 			FROM post
 		]]>
 	</select>
-
-
+	<!-- 페이징 처리를 위한 sql문▲▲▲▲▲▲▲▲ -->
+	
+	<!-- 파일업로드의 내용을 DB에 넣기전에 작성한 글의 p_no를 가져오는 sql  -->
+	<select id="findPostNo" resultType="int">
+		<![CDATA[
+			SELECT p_no
+			FROM post
+			where p_title = #{p_title} and
+			p_content = #{p_content} and
+			user_id = #{user_id}
+		]]>
+	</select>
+	
+	<!-- 파일 업로드 sql문 -->
+	<insert id="postAttachRegi" parameterType="com.example.board.domain.AttachVO">
+		<![CDATA[
+			insert into attach (ori_nm, save_nm, p_no, uuid)
+			values (#{ori_nm}, #{save_nm}, #{p_no}, #{uuid})
+		]]>
+	</insert>
+	
+	<!-- 첨부파일 리스트를 가져오는 sql문 -->
+	<select id="attachList" resultType="com.example.board.domain.AttachVO">
+		<![CDATA[
+			SELECT *
+			FROM attach
+			WHERE p_no = #{p_no};
+		]]>
+	</select>
+	
+	<!-- 글 수정 페이지에서 첨부파일 삭제 sql문 -->
+	<delete id="delAttach" parameterType="com.example.board.domain.AttachVO">
+		delete
+		from attach
+		where uuid = #{uuid}
+	</delete>
+	
 </mapper>

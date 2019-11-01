@@ -14,5 +14,5 @@ public class PostVO {
 	
 	//Foreign Key
 	private String user_id;
-	
+
 }

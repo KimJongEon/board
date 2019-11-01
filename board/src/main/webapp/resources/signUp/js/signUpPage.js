@@ -1,4 +1,51 @@
 $(document).ready(function(){
+	// 회원가입시 아이디, 비밀번호, 비밀번호확인, 이름, 휴대폰번호 체크
+	$("#signUpBtn").click(function(){
+		var pwd1=$("#password_01").val();
+        var pwd2=$("#password_02").val();
+        
+		if($("#user_id").val().length == 0){
+			alert("아이디를 입력해주세요."); //알림창 띄우기
+			$("#user_id").focus(); //제목창으로 포커스
+			return false; //submit을 막기위해 리턴 false 해줌
+		}
+	
+        if(pwd1 != "" || pwd2 != ""){
+            if(pwd1 != pwd2){
+            	alert("비밀번호를 정확히 입력해주세요");
+    			$("#password_01").focus();
+    			return false;
+            }
+        }
+        
+		if($("#password_01").val().length == 0){
+			alert("비밀번호를 정확히 입력해주세요");
+			$("#password_01").focus();
+			return false;
+		}
+		
+		if($("#password_02").val().length == 0){
+			alert("비밀번호를 정확히 입력해주세요");
+			$("#password_02").focus();
+			return false;
+		}
+
+		if($("#user_nm").val().length == 0){
+			alert("이름을 입력해주세요.");
+			$("#user_nm").focus();
+			return false;
+		}
+		
+		if($("#ph_no").val().length == 0){
+			alert("휴대폰 번호를 입력해주세요.");
+			$("#ph_no").focus();
+			return false;
+		}
+		
+		
+		
+	}); //click function END
+	
 	var idCheck = false;
 	var pwCheck = false;
 	$("input[name=user_id]").keyup(function(event){ 

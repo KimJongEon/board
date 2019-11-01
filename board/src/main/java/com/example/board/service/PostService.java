@@ -1,7 +1,9 @@
 package com.example.board.service;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
+import com.example.board.domain.AttachVO;
 import com.example.board.domain.PostVO;
 import com.example.board.paging.Pagination;
 
@@ -28,4 +30,16 @@ public interface PostService {
 	
 	//총 게시글 개수 확인
 	public int getBoardListCnt();
+	
+	//파일업로드의 내용을 DB에 넣기전에 작성한 글의 p_no를 가져오는 함수 
+	public int findPostNo(String p_title, String p_content, String user_id);
+
+	//파일업로드의 내용을 DB에 저장하는 함수
+	public int postAttachRegi(int p_no, String ori_nm, String uuid, String save_nm);
+
+	//글 상세내용을 불러올때 가져올 첨부파일 목록
+	public ArrayList<AttachVO> attachList(int p_no);
+
+	//글 수정에서 첨부파일 삭제 함수
+	public int delAttach(String uuid);
 }
