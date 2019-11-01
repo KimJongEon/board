@@ -24,7 +24,7 @@ $(document).ready(function() {
 	                for(i=0; i<data.length; i++){
 	                	var test = data[i].uuid + ","+ data[i].save_nm;
 	                	var onclickData = "javascript:deleteAttach" + "('" + test + "')";
-//	                	console.log(uuid);
+//	                	console.log(uuid); 
 //	                	attach_no, ori_nm, p_no, save_nm, uuid
 	                	html += "<div>";
 	                	html += "<a href='/upLoad/"+data[i].save_nm+"' download='"+data[i].ori_nm+"' class='ori_nm'>"+data[i].ori_nm+"</a>";
