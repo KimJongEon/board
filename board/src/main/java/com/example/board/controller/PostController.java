@@ -140,7 +140,7 @@ public class PostController {
 		}
 		return null;
 	}
-	// 글 삭제
+	// 글 삭제(업로드한 파일 삭제 포함)
 	@ResponseBody
 	@RequestMapping(value = "/postDelBtn", method = RequestMethod.GET)
 	public String postDelBtn(@RequestParam int p_no) {
@@ -148,13 +148,39 @@ public class PostController {
 		System.out.println(p_no);
 		System.out.println("삭제 컨트롤러 오는지 확인");
 
+		// 1. 해당 글 번호의 첨부파일 save_nm가져오기
+		ArrayList<AttachVO> attachList = new ArrayList<>();
+		attachList = postService.attachList(p_no);
+		
+		// 2. save_nm을 담을 ArrayList선언
+		ArrayList<String> saveNmList = new ArrayList<String>();
+		
+		// 3. 업로드한 폴더 경로
+		String fullPath = "C:/upload/";
+		int delAttach = 0;
+		
+		// 4. attachList의 사이즈만큼 for문을 돌려서 fullPath 경로의 파일을 모두 삭제
+		for(int i=0; attachList.size() > i; i++) {
+//			list.add("save_nm");
+			System.out.println("save_nm 확인 : "+ attachList.get(i).getSave_nm());
+			
+			
+			// 5. 파일이 저장된 경로를 찾아가서 해당 파일을 삭제한다.
+			File file = new File(fullPath + attachList.get(i).getSave_nm());
+			if (file.exists()) {
+				file.delete();
+			} else {
+				System.out.println("글 삭제실패, 파일이 존재하지 않습니다.");
+				return "fail";
+			}
+		}
+		
 		int postDel = postService.postDel(p_no);
 		if (postDel == 1) {
 			return "success";
 		} else {
 			return "fail";
 		}
-
 	}
 
 	// 글 수정 페이지 이동

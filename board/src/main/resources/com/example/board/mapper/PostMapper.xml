@@ -31,6 +31,11 @@
 		where p_no = #{p_no}
 	</delete>
 	
+	<!-- 글 삭제 시 해당 글 첨부파일의 save_nm가져오기 -->
+	<select id="" >
+	
+	</select>
+	
 	<!-- 글 수정 sql문 -->
 	<update id="postEdit" parameterType="com.example.board.domain.PostVO">
 		update post
